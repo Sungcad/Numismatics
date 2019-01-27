@@ -1,0 +1,92 @@
+name: Numismatics
+version: 1.0.2
+main: me.sungcad.numismatics.Main
+prefix: Numismatics
+description: Tools for measuring the wealth of players.
+author: Sungcad
+depend:
+- Vault
+softdepend:
+- VanishNoPacket
+commands:
+  numismatics:
+    description: Base command for Numismatics.
+    usage: /<command> (help|info|reload)
+    permission: numismatics.info
+    permission-message: §cYou do not have permission to use this command
+  baltop:
+    description: |
+      Lists the players with the most money. Shows balance as an rounded amount for exact amounts use ebaltop.
+    aliases:
+    - topbal
+    usage: /<command>
+    permission: numismatics.baltop
+    permission-message: §cYou do not have permission to use this command
+  ebaltop:
+    description: |
+      Lists the players with the most money. Shows balance as an exact amount for rounded amounts use baltop.
+    aliases:
+    - etopbal
+    usage: /<command>
+    permission: numismatics.ebaltop
+    permission-message: §cYou do not have permission to use this command
+  balance:
+    description: |
+      Shows the rounded balance of a player. For exact values use ebalance.
+    aliases:
+    - bal
+    usage: /<command> (player)
+    permission: numismatics.balance.self
+    permission-message: §cYou do not have permission to use this command
+  ebalance:
+    description: |
+      Shows the exact balance of a player. For rounded values use balance.
+    aliases:
+    - ebal
+    usage: /<command> (player)
+    permission: numismatics.ebalance.self
+    permission-message: §cYou do not have permission to use this command
+  economy:
+    description: Edit the balances of players.
+    aliases:
+    - eco
+    usage: /<command> <give|set|take> <player> <amount>
+    permission: numismatics.economy
+    permission-message: §cYou do not have permission to use this command
+  pay:
+    description: Send money to another player.
+    usage: /<command> <player> <amount>
+    permission: numismatics.pay
+    permission-message: §cYou do not have permission to use this command
+permissions:
+  numismatics.admin:
+    description: Gives access to all Numismatics commands
+    children:
+      numismatics.balance.others: true
+      numismatics.ebalance.others: true
+      numismatics.baltop: true
+      numismatics.ebaltop: true
+      numismatics.economy: true
+      numismatics.pay.payall: true
+      numismatics.reload: true
+      numismatics.help: true
+  numismatics.balance.others:
+    description: Gives permission to checks the rounded balance of others
+    children:
+      numismatics.balance.self: true
+  numismatics.ebalance.others:
+    description: Gives permission to checks the exact balance of others
+    children:
+      numismatics.ebalance.self: true
+  numismatics.pay.payall:
+    description: Gives access to /pay * <amount>
+    children:
+      numismatics.pay: true
+  numismatics.reload:
+    description: Gives permission to reload the Numismatics config.yml
+    children:
+      numismatics.help: true
+  numismatics.help:
+    description: Gives permission view plugin information
+    children:
+      numismatics.info: true

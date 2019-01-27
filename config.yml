@@ -1,0 +1,93 @@
+#for all messages use & for color codes
+
+#suffixes for rounded money values
+suffixes:
+  #suffix for thousand 1,000
+  k: "k"
+  #suffix for million 1,000,000
+  m: "M"
+  #suffix for billion 1,000,000,000
+  b: "B"
+  #suffix for trillion 1,000,000,000,000
+  t: "T"
+  #suffix for Quadrillion 1,000,000,000,000,000
+  q: "Q"
+
+#config for the /bal and /ebal commands
+#placeholders {name} and {balance}
+balance:
+  #shown when checking your own balance
+  self: "&6Your balance is &2{balance}"
+  #shown when checking another players balance
+  others: "&6The balance of {name} is &2{balance}"
+
+#config for /baltop and /ebaltop
+baltop:
+  #should baltop show only the online players or all players
+  online: true
+  #how often should the list update in seconds
+  update: 120
+  #number of players per page
+  players: 10
+  format:
+    #shown before the players in /baltop and /ebaltop
+    first: "&6======== Top Balances ========"
+    #format for player information in baltop and ebaltop
+    #placeholders {number} {name} {balance}
+    player: "&8{number} &7{name} {balance}"
+    #format of last line to skip put ''
+    last: "&6==============================="
+
+#config for /pay
+pay:
+  #does the player have to send the command again to confirm.
+  confirm: false
+  #minimum amount of money to send
+  min: 500.0
+  #messages for pay
+  #placeholders {sender} {receiver} {amount}
+  #messages for confirmation if enabled
+  confirmation:
+    #message to player asking for confirmation /pay player
+    one: "You are about to pay {receiver} {amount}. type /pay {receiver} {amount} to confirm."
+    #message to player asking for confirmation /pay *
+    all: "You are about to pay everyone {amount}. type /pay * {amount} to confirm."
+  #messages for when it works
+  success:
+    #sent to the player who sent the money
+    sender: "You have sent {amount} to {receiver}"
+    #sent to the player who received the money
+    receiver: "You have received {amount} from {sender}"
+  #messages sent when something goes wrong
+  failure:
+    #message when a player tries to send money to themself
+    senttoself: "You can't send money to yourself"
+    #message when a player tries to send less than the minimum amount
+    belowminimum: "You must send at least $500"
+    #message when the player doesn't have
+    lowbalance: "You do not have {amount}"
+    #message when the target is not online
+    playernotfound: "Player not found"
+
+#config for /eco
+economy:
+  #messages for setting a balance
+  #placeholders {receiver} {amount}
+  set:
+    #message to the player who sends the command
+    sender: "You have set {receiver}'s balance to {amount}"
+    #message to targeted player
+    receiver: "Your balance has been set to {amount}"
+  give:
+    #message to the player who sends the command
+    sender: "You have sent {receiver} {amount}"
+    #message to targeted player
+    receiver: "{amount} has been added to your balance"
+  take:
+    #message to the player who sends the command
+    sender: "You have taken {amount} from {receiver}"
+    #message to targeted player
+    receiver: "{amount} has been taken from you balances"
+  error:
+    #message if the player is not found
+    playernotfound: "Player not found"
