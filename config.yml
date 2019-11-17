@@ -1,26 +1,3 @@
-#for all messages use & for color codes
-
-#suffixes for rounded money values
-suffixes:
-  #suffix for thousand 1,000
-  k: "k"
-  #suffix for million 1,000,000
-  m: "M"
-  #suffix for billion 1,000,000,000
-  b: "B"
-  #suffix for trillion 1,000,000,000,000
-  t: "T"
-  #suffix for Quadrillion 1,000,000,000,000,000
-  q: "Q"
-
-#config for the /bal and /ebal commands
-#placeholders {name} and {balance}
-balance:
-  #shown when checking your own balance
-  self: "&6Your balance is &2{balance}"
-  #shown when checking another players balance
-  others: "&6The balance of {name} is &2{balance}"
-
 #config for /baltop and /ebaltop
 baltop:
   #should baltop show only the online players or all players
@@ -29,14 +6,6 @@ baltop:
   update: 120
   #number of players per page
   players: 10
-  format:
-    #shown before the players in /baltop and /ebaltop
-    first: "&6======== Top Balances ========"
-    #format for player information in baltop and ebaltop
-    #placeholders {number} {name} {balance}
-    player: "&8{number} &7{name} {balance}"
-    #format of last line to skip put ''
-    last: "&6==============================="
 
 #config for /pay
 pay:

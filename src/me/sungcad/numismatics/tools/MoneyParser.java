@@ -5,8 +5,6 @@ import java.text.NumberFormat;
 
 import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
-import me.sungcad.numismatics.NumismaticsPlugin;
-
 public class MoneyParser {
     static final double K = 1000;
     static final double M = K * K; // M = 1,000,000
@@ -72,15 +70,15 @@ public class MoneyParser {
             else if (input < K)
                 text = String.format("$%s", eformat.format(input));
             else if (input < M)
-                text = String.format("$%s" + NumismaticsPlugin.getPlugin().getConfig().getString("suffixes.k", "k"), rformat.format(input / K));
+                text = String.format("$%s" + Files.CONFIG.getConfig().getString("suffixes.k", "k"), rformat.format(input / K));
             else if (input < B)
-                text = String.format("$%s" + NumismaticsPlugin.getPlugin().getConfig().getString("suffixes.m", "M"), rformat.format(input / M));
+                text = String.format("$%s" + Files.CONFIG.getConfig().getString("suffixes.m", "M"), rformat.format(input / M));
             else if (input < T)
-                text = String.format("$%s" + NumismaticsPlugin.getPlugin().getConfig().getString("suffixes.b", "B"), rformat.format(input / B));
-            else if(input < Q)
-                text = String.format("$%s" + NumismaticsPlugin.getPlugin().getConfig().getString("suffixes.t", "T"), rformat.format(input / T));
+                text = String.format("$%s" + Files.CONFIG.getConfig().getString("suffixes.b", "B"), rformat.format(input / B));
+            else if (input < Q)
+                text = String.format("$%s" + Files.CONFIG.getConfig().getString("suffixes.t", "T"), rformat.format(input / T));
             else
-                text = String.format("$%s" + NumismaticsPlugin.getPlugin().getConfig().getString("suffixes.q", "Q"), rformat.format(input / Q));
+                text = String.format("$%s" + Files.CONFIG.getConfig().getString("suffixes.q", "Q"), rformat.format(input / Q));
         else
             text = String.format("$%s", eformat.format(input));
         return translateAlternateColorCodes('&', text.replace(".00", ""));

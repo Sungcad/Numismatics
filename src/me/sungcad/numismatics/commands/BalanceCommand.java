@@ -2,6 +2,7 @@ package me.sungcad.numismatics.commands;
 
 import static me.sungcad.numismatics.tools.MoneyParser.format;
 import static org.bukkit.ChatColor.translateAlternateColorCodes;
+
 import static org.bukkit.Bukkit.getPlayer;
 
 import org.bukkit.command.Command;
@@ -10,13 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.sungcad.numismatics.NumismaticsPlugin;
+import me.sungcad.numismatics.tools.Files;
 
 public class BalanceCommand implements CommandExecutor {
     private boolean rounded;
-    private NumismaticsPlugin plugin;
 
-    public BalanceCommand(boolean rounded, NumismaticsPlugin plugin) {
-        this.plugin = plugin;
+    public BalanceCommand(boolean rounded) {
         this.rounded = rounded;
 
     }
@@ -52,7 +52,7 @@ public class BalanceCommand implements CommandExecutor {
     }
 
     private void sendMessage(String string, Player target, CommandSender user) {
-        String text = plugin.getConfig().getString(string);
+        String text = Files.LANG.getConfig().getString(string);
         text = text.replace("{balance}", format(NumismaticsPlugin.getEconomy().getBalance(target), rounded));
         text = text.replace("{name}", target.getName());
         text = translateAlternateColorCodes('&', text);

@@ -17,7 +17,6 @@ public class VanishMan {
     private void load() {
         if (Bukkit.getPluginManager().isPluginEnabled("VanishNoPacket")) {
             plugin = (VanishPlugin) Bukkit.getPluginManager().getPlugin("VanishNoPacket");
-
         }
     }
 

@@ -13,15 +13,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.sungcad.numismatics.NumismaticsPlugin;
+import me.sungcad.numismatics.tools.Files;
 import net.milkbowl.vault.economy.Economy;
 
 public class PayCommand implements CommandExecutor {
-    private NumismaticsPlugin plugin;
     private HashMap<String, String> confirmation = new HashMap<String, String>();
-
-    public PayCommand(NumismaticsPlugin plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String cmdname, String[] args) {
@@ -31,7 +27,7 @@ public class PayCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 double amount = parse(args[1]);
                 if (target != null) {
-                    if (plugin.getConfig().getBoolean("pay.confirm")) {
+                    if (Files.CONFIG.getConfig().getBoolean("pay.confirm")) {
                         if (confirmation.containsKey(player.getName())) {
                             if (confirmation.get(player.getName()).equals(target.getName() + ", " + amount)) {
                                 confirmation.remove(player.getName());
@@ -49,7 +45,7 @@ public class PayCommand implements CommandExecutor {
                     if (sender.hasPermission("numismatics.pay.payall")) {
                         int playercount = Bukkit.getOnlinePlayers().size();
                         if (NumismaticsPlugin.getEconomy().has(player, amount * (playercount - 1))) {
-                            if (plugin.getConfig().getBoolean("pay.confirm")) {
+                            if (Files.CONFIG.getConfig().getBoolean("pay.confirm")) {
                                 if (confirmation.containsKey(player.getName())) {
                                     if (confirmation.get(player.getName()).equals("*, " + amount)) {
                                         confirmation.remove(player.getName());
@@ -71,7 +67,7 @@ public class PayCommand implements CommandExecutor {
                     } else
                         sendMessage(sender, cmd.getPermissionMessage());
                 } else
-                    sendMessage(sender, translateAlternateColorCodes('&', plugin.getConfig().getString("pay.failure.playernotfound")));
+                    sendMessage(sender, translateAlternateColorCodes('&', Files.CONFIG.getConfig().getString("pay.failure.playernotfound")));
             } else
                 sendMessage(sender, cmd.getUsage().replace("<command>", cmdname));
         } else
@@ -90,7 +86,7 @@ public class PayCommand implements CommandExecutor {
     private boolean pay(Player sender, Player target, double amount) {
         Economy econ = NumismaticsPlugin.getEconomy();
         if (sender != target) {
-            if (amount >= plugin.getConfig().getDouble("pay.min")) {
+            if (amount >= Files.CONFIG.getConfig().getDouble("pay.min")) {
                 if (econ.has(sender, amount)) {
                     if (econ.withdrawPlayer(sender, amount).transactionSuccess() && econ.depositPlayer(target, amount).transactionSuccess()) {
                         sendMessage(sender, formatConfigString("pay.success.sender", sender, target.getName(), amount));
@@ -106,7 +102,7 @@ public class PayCommand implements CommandExecutor {
     }
 
     private String formatConfigString(String message, Player sender, String target, double amount) {
-        String text = plugin.getConfig().getString(message);
+        String text = Files.CONFIG.getConfig().getString(message);
         text = text.replace("{amount}", format(amount, true));
         text = text.replace("{receiver}", target);
         text = text.replace("{sender}", sender.getName());

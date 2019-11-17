@@ -1,6 +1,6 @@
 name: Numismatics
-version: 1.0.2
-main: me.sungcad.numismatics.Main
+version: 1.0.3
+main: me.sungcad.numismatics.NumismaticsPlugin
 prefix: Numismatics
 description: Tools for measuring the wealth of players.
 author: Sungcad
